@@ -686,8 +686,9 @@ async function generateFullContent(){
     "MODULE FLOW (write these, in this order): " + JSON.stringify(concept.moduleFlow), "",
     "TASK",
     "Write the complete A+ Content for every module in MODULE FLOW.",
+    "IMAGE USE IS MANDATORY, NOT OPTIONAL: every module type hero, feature_bullets, use_cases, whats_in_box, and brand_story MUST set imageIndex to a real index from IMAGES AVAILABLE — pick whichever available photo best fits, even if the fit is only approximate. Only comparison and faq may use -1. Across all modules, use every image in IMAGES AVAILABLE at least once if there are enough modules to do so; never leave an image unused while a module that could plausibly show a product photo sits at -1.",
     "For each module return an object:",
-    '{"type":"...", "headline":"...", "subheadline":"... or empty string", "body":"short paragraph or empty string", "bullets":["...", ...] (empty array if not applicable), "faq":[{"q":"...","a":"..."}] (only for type faq, else []), "compareRows":[{"label":"...","this":"...","typical":"..."}] (only for type comparison, else []), "imageIndex": integer index into the IMAGES AVAILABLE list this module should use, or -1, "mobileNote":"one short note on how this reads on mobile"}',
+    '{"type":"...", "headline":"...", "subheadline":"... or empty string", "body":"short paragraph or empty string", "bullets":["...", ...] (empty array if not applicable), "faq":[{"q":"...","a":"..."}] (only for type faq, else []), "compareRows":[{"label":"...","this":"...","typical":"..."}] (only for type comparison, else []), "imageIndex": integer index into the IMAGES AVAILABLE list this module should use (see IMAGE USE above -- only comparison/faq may be -1), "mobileNote":"one short note on how this reads on mobile"}',
     "", 'Reply with ONLY a JSON object: {"modules":[ ... ]}'
   ].join("\n");
   try{
@@ -868,9 +869,15 @@ function resumeDraft(id){
   const rec = loadDrafts().find(d=>d.id===id);
   if(!rec) return;
   S = Object.assign(newState(), rec, {images: []});
-  if(!S.modules && S.concepts && S.conceptId) S.step = "concepts";
+  const imagesIdx = STEP_ORDER.indexOf("images");
+  const stepIdx = STEP_ORDER.indexOf(S.step);
+  if(stepIdx > imagesIdx){
+    // Photos never persist across visits (nothing is uploaded to a server) --
+    // never silently continue into content/preview with no photos attached.
+    S.step = "images";
+    S.error = "Your photos didn't carry over from last time (nothing is stored on a server) — re-add them before continuing.";
+  }
   render();
-  toast("Draft resumed — your photos didn't persist between visits, please re-add them.");
 }
 
 /* ============================= RENDER ============================= */
