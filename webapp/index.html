@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A+ Content Generator</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Baloo+2:wght@600;700;800&family=Caveat:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">A+ Content Generator</div>
+  <div class="subbrand">any product, real photos, AI-drafted modules</div>
+</header>
+
+<main class="layout">
+  <section class="panel form-panel">
+    <h2>1. Product</h2>
+    <label>Product name
+      <input id="productName" type="text" placeholder="e.g. Value Plus Blue Centrefeed Rolls">
+    </label>
+    <label>Brand <span class="opt">(optional)</span>
+      <input id="brand" type="text" placeholder="e.g. Value Plus">
+    </label>
+    <label>Description
+      <textarea id="description" rows="4" placeholder="What is it, what's it for, key specs..."></textarea>
+    </label>
+
+    <h2>2. Features</h2>
+    <div class="row">
+      <textarea id="featureInput" rows="3" placeholder="One feature per line, or leave blank and click Suggest"></textarea>
+    </div>
+    <div class="row">
+      <button id="addFeaturesBtn" class="btn-secondary">Add lines as features</button>
+      <button id="suggestFeaturesBtn" class="btn-secondary">Suggest features with AI</button>
+    </div>
+    <ul id="featureList" class="feature-list"></ul>
+
+    <h2>3. Product photos <span class="opt">(up to 12)</span></h2>
+    <input id="imageInput" type="file" accept="image/*" multiple>
+    <div id="imageGrid" class="image-grid"></div>
+
+    <h2>4. Style</h2>
+    <div id="styleGrid" class="style-grid"></div>
+
+    <h2>5. Generate</h2>
+    <label>Modules
+      <select id="moduleCount">
+        <option value="3">3 (quick)</option>
+        <option value="5">5</option>
+        <option value="7" selected>7 (full Amazon Premium A+ max)</option>
+      </select>
+    </label>
+    <button id="createBtn" class="btn-primary">Create A+ Content</button>
+    <div id="status" class="status"></div>
+  </section>
+
+  <section class="panel results-panel">
+    <h2>Modules</h2>
+    <div id="results" class="results"></div>
+  </section>
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>
