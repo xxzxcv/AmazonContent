@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+  <style>
+    :root{
+      --navy:#16234F; --navy2:#22346A; --sky:#6E9FCB; --sky-light:#DCE9F5;
+      --paper:#FAFAF8; --ink:#12182B; --ink-muted:#4B5670; --line:#D8DEE8; --amber:#E8A33D;
+    }
+    body{ margin:0; font-family:'IBM Plex Sans', system-ui, sans-serif; }
+    h1,h2,h3{ font-family:'Sora', system-ui, sans-serif; margin:0; }
+    table{ border-collapse:collapse; width:100%; }
+    th,td{ padding:14px 18px; text-align:left; font-size:15px; }
+    th{ font-family:'IBM Plex Sans'; font-size:12px; text-transform:uppercase; letter-spacing:.06em; color:var(--sky); font-weight:600; border-bottom:1px solid rgba(255,255,255,.14); }
+    td{ border-bottom:1px solid rgba(255,255,255,.08); color:#DCE4F2; }
+    td.this{ color:#8FE0C8; font-weight:600; }
+    td.label{ color:#fff; font-weight:600; }
+  </style>
+</helmet>
+<div style="width:1464px;height:600px;position:relative;overflow:hidden;background:linear-gradient(160deg,var(--navy) 0%,#101a3c 100%);box-sizing:border-box;padding:52px 64px;display:flex;flex-direction:column;gap:20px;">
+  <div>
+    <div style="font-family:'IBM Plex Sans';font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--sky);">Comparison</div>
+    <h2 style="font-size:32px;font-weight:800;color:#fff;">This product vs. typical alternatives</h2>
+  </div>
+  <table>
+    <tr><th></th><th>Value Plus Blue Centrefeed</th><th>Typical Alternatives</th></tr>
+    <tr><td class="label">Absorbency</td><td class="this">Highly absorbent, embossed</td><td>Standard, often flat</td></tr>
+    <tr><td class="label">Ply</td><td class="this">2-ply, reinforced</td><td>Usually 1-ply</td></tr>
+    <tr><td class="label">Pack size</td><td class="this">6 rolls &mdash; bulk value</td><td>Often 1&ndash;2 rolls</td></tr>
+    <tr><td class="label">Texture</td><td class="this">Embossed for grip &amp; strength</td><td>Smooth, tears easily</td></tr>
+    <tr><td class="label">Use cases</td><td class="this">Kitchen, workshop &amp; clinical</td><td>Usually single-purpose</td></tr>
+  </table>
+</div>
+</x-dc>
+</body>
+</html>

@@ -1,0 +1,12 @@
+{
+  "artboards": [
+    { "file": "Main.dc.html", "x": 0, "y": 0, "w": 1464, "h": 600, "title": "1. Hero" },
+    { "file": "Benefits.dc.html", "x": 1544, "y": 0, "w": 1464, "h": 600, "title": "2. Key Benefits" },
+    { "file": "Diagram.dc.html", "x": 3088, "y": 0, "w": 1464, "h": 600, "title": "3. Built For The Job" },
+    { "file": "UseCases.dc.html", "x": 4632, "y": 0, "w": 1464, "h": 600, "title": "4. Where It Works Best" },
+    { "file": "Comparison.dc.html", "x": 6176, "y": 0, "w": 1464, "h": 600, "title": "5. Comparison" },
+    { "file": "WhatsInPack.dc.html", "x": 7720, "y": 0, "w": 1464, "h": 600, "title": "6. What You Get" },
+    { "file": "BrandClose.dc.html", "x": 9264, "y": 0, "w": 1464, "h": 600, "title": "7. Brand Close" }
+  ],
+  "launch": { "view": "canvas" }
+}

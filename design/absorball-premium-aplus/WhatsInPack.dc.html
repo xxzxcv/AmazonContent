@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+  <style>
+    :root{
+      --navy:#16234F; --navy2:#22346A; --sky:#6E9FCB; --sky-light:#DCE9F5;
+      --paper:#FAFAF8; --ink:#12182B; --ink-muted:#4B5670; --line:#D8DEE8; --amber:#E8A33D;
+    }
+    body{ margin:0; font-family:'IBM Plex Sans', system-ui, sans-serif; }
+    h1,h2,h3{ font-family:'Sora', system-ui, sans-serif; margin:0; }
+    .spec{ display:flex; justify-content:space-between; padding:13px 0; border-bottom:1px solid var(--line); font-size:15px; }
+    .spec b{ color:var(--navy); }
+    .spec span{ color:var(--ink-muted); }
+  </style>
+</helmet>
+<div style="width:1464px;height:600px;position:relative;overflow:hidden;background:var(--paper);box-sizing:border-box;padding:56px 60px;display:flex;gap:56px;align-items:center;">
+  <div style="flex:1;height:80%;border-radius:14px;overflow:hidden;box-shadow:0 20px 40px rgba(22,35,79,.16);">
+    <img src="pack-stacked.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
+  </div>
+  <div style="flex:1.1;">
+    <div style="font-family:'IBM Plex Sans';font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--sky);margin-bottom:8px;">What You Get</div>
+    <h2 style="font-size:32px;font-weight:800;color:var(--navy);margin-bottom:20px;">One pack, fully stocked</h2>
+    <div class="spec"><b>Roll count</b><span>6 centrefeed rolls</span></div>
+    <div class="spec"><b>Ply</b><span>2-ply, embossed</span></div>
+    <div class="spec"><b>Product code</b><span>DWCF01</span></div>
+    <div class="spec"><b>Colour</b><span>Blue</span></div>
+    <div class="spec"><b>Dispensing</b><span>Fits standard wall &amp; stand dispensers</span></div>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

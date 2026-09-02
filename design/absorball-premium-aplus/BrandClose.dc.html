@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+  <style>
+    :root{
+      --navy:#16234F; --navy2:#22346A; --sky:#6E9FCB; --sky-light:#DCE9F5;
+      --paper:#FAFAF8; --ink:#12182B; --ink-muted:#4B5670; --line:#D8DEE8; --amber:#E8A33D;
+    }
+    body{ margin:0; font-family:'IBM Plex Sans', system-ui, sans-serif; }
+    h1,h2,h3{ font-family:'Sora', system-ui, sans-serif; margin:0; }
+  </style>
+</helmet>
+<div style="width:1464px;height:600px;position:relative;overflow:hidden;background:var(--sky-light);display:flex;align-items:center;">
+  <div style="flex:1;height:100%;display:flex;align-items:center;justify-content:center;padding:40px;box-sizing:border-box;">
+    <img src="pack-triple.jpg" style="max-width:88%;max-height:88%;object-fit:contain;filter:drop-shadow(0 20px 30px rgba(22,35,79,.22));">
+  </div>
+  <div style="flex:1.1;height:100%;background:var(--navy);display:flex;flex-direction:column;justify-content:center;padding:60px;box-sizing:border-box;gap:18px;">
+    <div style="font-family:'IBM Plex Sans';font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--sky);">Value Plus</div>
+    <h2 style="font-size:40px;font-weight:800;color:#fff;line-height:1.08;">One roll.<br>Every mess.</h2>
+    <div style="font-size:16.5px;color:#DCE4F2;max-width:38ch;line-height:1.55;">Trusted in professional kitchens, workshops, and clinical spaces &mdash; Value Plus keeps you stocked and ready for whatever's next.</div>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>
