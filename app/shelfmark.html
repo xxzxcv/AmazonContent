@@ -297,6 +297,61 @@ textarea{min-height:110px;}
 .mod-box ul{padding-left:18px; margin:0; font-size:13.5px; color:#33403A;}
 .mobile-note{font-family:var(--font-mono); font-size:10px; color:#9AA69F; margin-top:10px; border-top:1px dashed #E1E5DC; padding-top:8px;}
 
+/* Hero: full-bleed photo with overlaid type */
+.mod-hero{position:relative; min-height:440px; background-size:cover; background-position:center; display:flex; align-items:flex-end; color:#fff; margin:-26px -30px; }
+.device-frame.mobile .mod-hero{min-height:280px; margin:-18px -16px;}
+.mod-card .mod-hero{margin:-26px -28px;}
+.device-frame.mobile .mod-card .mod-hero{margin:-18px -16px;}
+.mod-hero::before{content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(10,16,13,0) 22%, rgba(10,16,13,.85) 100%);}
+.mod-hero-copy{position:relative; z-index:1; padding:36px 34px 28px; max-width:640px;}
+.device-frame.mobile .mod-hero-copy{padding:20px 18px 18px;}
+.mod-hero-copy .mod-eyebrow{color:#BFEAD9;}
+.mod-hero-copy h3{font-size:44px; color:#fff; line-height:1.04; margin-bottom:10px;}
+.device-frame.mobile .mod-hero-copy h3{font-size:25px;}
+.mod-hero-copy .sub{color:#E7F3EE; font-size:15.5px;}
+.mod-hero-copy .body-txt{color:#EAF2EE; max-width:56ch;}
+.mod-hero-copy ul.bullets li{color:#EAF2EE;}
+.mod-hero-copy ul.bullets li::before{color:#5FE0BC;}
+.mod-hero-fallback{background:linear-gradient(135deg,var(--accent),#0B4A3E); color:#fff; padding:46px 34px; margin:-26px -30px; border-radius:inherit;}
+.mod-card .mod-hero-fallback{margin:-26px -28px;}
+.device-frame.mobile .mod-hero-fallback{padding:28px 18px; margin:-18px -16px;}
+.mod-hero-fallback .mod-eyebrow{color:#BFEAD9;}
+.mod-hero-fallback h3{color:#fff; font-size:38px;}
+.device-frame.mobile .mod-hero-fallback h3{font-size:24px;}
+.mod-hero-fallback .sub, .mod-hero-fallback .body-txt{color:#EAF2EE;}
+
+/* Leader-line spec diagram: labels flank a centered photo */
+.leader-wrap{display:grid; grid-template-columns:1fr auto 1fr; gap:18px; align-items:center;}
+.leader-col{display:flex; flex-direction:column; gap:16px; min-width:0;}
+.leader-col.right{align-items:flex-end; text-align:right;}
+.leader-label{display:flex; align-items:center; gap:8px; font-size:12.5px; color:#33403A; line-height:1.3;}
+.leader-col.right .leader-label{flex-direction:row-reverse;}
+.leader-tick{width:20px; height:1px; background:var(--accent); flex:none;}
+.leader-img{width:230px; max-width:100%; border-radius:10px; overflow:hidden; box-shadow:0 8px 22px rgba(0,0,0,.14); flex:none;}
+.leader-img img{width:100%; display:block;}
+.leader-stack{display:none;}
+.device-frame.mobile .leader-wrap{display:none;}
+.device-frame.mobile .leader-stack{display:block;}
+
+/* Icon-badge rows (bullets without a matching photo) */
+.badge-row{display:flex; gap:16px; flex-wrap:wrap;}
+.badge-item{display:flex; flex-direction:column; align-items:center; text-align:center; width:104px; gap:7px;}
+.badge-circle{width:46px; height:46px; border-radius:50%; background:var(--accent-soft); color:var(--accent); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:15px; font-family:var(--font-mono); flex:none;}
+.badge-item .lbl{font-size:11.5px; color:#4C5A52; line-height:1.32;}
+
+/* Dark comparison data card */
+.mod-compare-dark{background:#14201B; color:#EAF2EE; border-radius:12px; overflow:hidden;}
+.mod-compare-dark table{width:100%; border-collapse:collapse; font-size:12.5px;}
+.mod-compare-dark th{color:var(--tag); text-transform:uppercase; font-family:var(--font-mono); font-size:10px; letter-spacing:.04em; padding:12px; text-align:left; font-weight:600;}
+.mod-compare-dark td{padding:11px 12px; border-top:1px solid #253028;}
+.mod-compare-dark td.this-col, .mod-compare-dark th.this-col{color:#5FE0BC; font-weight:700;}
+
+/* Statement layout (brand story / problem-solution) */
+.statement-media{width:100%; border-radius:10px; overflow:hidden; margin-bottom:16px;}
+.statement-media img{width:100%; display:block; max-height:300px; object-fit:cover;}
+.statement-h{font-size:30px;}
+.device-frame.mobile .statement-h{font-size:21px;}
+
 .export-bar{display:flex; flex-wrap:wrap; gap:10px; margin-top:20px;}
 .spec-note{background:var(--accent-soft); border:1px solid var(--accent); border-radius:10px; padding:14px 16px; font-size:13px; color:var(--ink); margin-bottom:18px;}
 .spec-note b{color:var(--accent);}
@@ -458,10 +513,8 @@ const DEPTHS = {
 const STYLES = {
   cards:    {label:"Broken Cards",    desc:"Each module its own standalone tile — matches how Amazon ingests one image per module."},
   flow:     {label:"Smooth Flow",     desc:"One continuous scrolling page — classic storytelling layout."},
-  bento:    {label:"Bento Grid",      desc:"Every module tiled into one at-a-glance dashboard."},
-  callouts: {label:"Numbered Callouts", desc:"Feature bullets get numbered badges, echoed near the product photo."}
+  bento:    {label:"Bento Grid",      desc:"Every module tiled into one at-a-glance dashboard."}
 };
-const CALLOUT_POS = [{top:"8%",left:"6%"},{top:"12%",left:"78%"},{top:"70%",left:"8%"},{top:"66%",left:"74%"},{top:"42%",left:"42%"}];
 
 function toast(msg){
   const host = document.getElementById("toastHost");
@@ -1033,43 +1086,82 @@ function renderConceptsStep(){
     '</div>' + panelFoot("prev-usage", "Generate full content", "go-generate", !S.conceptId);
 }
 
+function moduleImg(m){
+  return (m.imageIndex>=0 && S.images[m.imageIndex]) ? S.images[m.imageIndex].dataUrl : null;
+}
+function eyebrowHtml(m){ return '<div class="mod-eyebrow">'+escapeHtml(moduleTitle(m.type))+'</div>'; }
+function mobileNoteHtml(m, device){
+  return (device==="mobile" && m.mobileNote) ? '<div class="mobile-note">📱 '+escapeHtml(m.mobileNote)+'</div>' : '';
+}
+
 function moduleInner(m, device, style){
-  let media = "";
-  if(m.imageIndex>=0 && S.images[m.imageIndex]){
-    const badges = (style==="callouts" && m.bullets && m.bullets.length)
-      ? m.bullets.slice(0,5).map((b,bi)=>{
-          const pos = CALLOUT_POS[bi % CALLOUT_POS.length];
-          return '<span class="callout-badge" style="top:'+pos.top+';left:'+pos.left+'">'+(bi+1)+'</span>';
-        }).join('')
-      : "";
-    media = '<div class="mod-media callout-media"><img src="'+S.images[m.imageIndex].dataUrl+'">'+badges+'</div>';
+  const img = moduleImg(m);
+
+  // Hero: full-bleed photo, oversized type overlaid, or a bold color banner if there's no photo.
+  if(m.type === "hero"){
+    const copy = eyebrowHtml(m) +
+      '<h3>'+escapeHtml(m.headline||"")+'</h3>' +
+      (m.subheadline ? '<div class="sub">'+escapeHtml(m.subheadline)+'</div>' : '') +
+      (m.body ? '<div class="body-txt">'+escapeHtml(m.body)+'</div>' : '') +
+      (m.bullets && m.bullets.length ? '<ul class="bullets">'+m.bullets.map(b=>'<li>'+escapeHtml(b)+'</li>').join('')+'</ul>' : '');
+    return (img
+      ? '<div class="mod-hero" style="background-image:url(\''+img+'\')"><div class="mod-hero-copy">'+copy+'</div></div>'
+      : '<div class="mod-hero-fallback">'+copy+'</div>') +
+      mobileNoteHtml(m, device);
   }
-  let inner = "";
+
+  // Comparison: dark data card, "this product" column called out.
   if(m.type === "comparison" && m.compareRows && m.compareRows.length){
-    inner = '<div class="mod-compare"><table><tr><th></th><th>This product</th><th>Typical alternatives</th></tr>' +
-      m.compareRows.map(r=>'<tr><td><b>'+escapeHtml(r.label)+'</b></td><td>'+escapeHtml(r.this)+'</td><td>'+escapeHtml(r.typical)+'</td></tr>').join('') +
-      '</table></div>';
-  } else if(m.type === "faq" && m.faq && m.faq.length){
-    inner = '<div class="mod-faq">'+m.faq.map(f=>'<div class="qa"><div class="q">'+escapeHtml(f.q)+'</div><div class="a">'+escapeHtml(f.a)+'</div></div>').join('')+'</div>';
-  } else if(m.bullets && m.bullets.length){
-    if(style==="callouts"){
-      inner = '<ol class="callout-list">'+m.bullets.map((b,bi)=>'<li><span class="callout-num">'+(bi+1)+'</span>'+escapeHtml(b)+'</li>').join('')+'</ol>';
-    } else if(m.type==="feature_bullets" && (style==="cards"||style==="bento") && m.bullets.length>=3){
-      inner = '<div class="chiplet-grid">'+m.bullets.map(b=>'<div class="chiplet">'+escapeHtml(b)+'</div>').join('')+'</div>';
-    } else {
-      inner = '<ul class="bullets">'+m.bullets.map(b=>'<li>'+escapeHtml(b)+'</li>').join('')+'</ul>';
-    }
+    return eyebrowHtml(m) + '<h3>'+escapeHtml(m.headline||"")+'</h3>' +
+      (m.subheadline ? '<div class="sub">'+escapeHtml(m.subheadline)+'</div>' : '') +
+      (m.body ? '<div class="body-txt">'+escapeHtml(m.body)+'</div>' : '') +
+      '<div class="mod-compare-dark"><table><tr><th></th><th class="this-col">This product</th><th>Typical alternatives</th></tr>' +
+      m.compareRows.map(r=>'<tr><td>'+escapeHtml(r.label)+'</td><td class="this-col">'+escapeHtml(r.this)+'</td><td>'+escapeHtml(r.typical)+'</td></tr>').join('') +
+      '</table></div>' + mobileNoteHtml(m, device);
   }
-  const hasSideBySide = media && inner && m.type !== "comparison" && m.type !== "faq";
-  const body = (m.body ? '<div class="body-txt">'+escapeHtml(m.body)+'</div>' : '');
-  const content = hasSideBySide
-    ? '<div class="mod-grid">'+media+'<div>'+body+inner+'</div></div>'
-    : (media + body + inner);
-  return '<div class="mod-eyebrow">'+escapeHtml(moduleTitle(m.type))+'</div>' +
-    '<h3>'+escapeHtml(m.headline||"")+'</h3>' +
+
+  // FAQ: clean Q/A card, unchanged.
+  if(m.type === "faq" && m.faq && m.faq.length){
+    return eyebrowHtml(m) + '<h3>'+escapeHtml(m.headline||"")+'</h3>' +
+      (m.subheadline ? '<div class="sub">'+escapeHtml(m.subheadline)+'</div>' : '') +
+      '<div class="mod-faq">'+m.faq.map(f=>'<div class="qa"><div class="q">'+escapeHtml(f.q)+'</div><div class="a">'+escapeHtml(f.a)+'</div></div>').join('')+'</div>' +
+      mobileNoteHtml(m, device);
+  }
+
+  // Feature/spec/use-case modules WITH a photo: leader-line diagram, labels flanking the image.
+  const isSpecType = m.type === "feature_bullets" || m.type === "use_cases" || m.type === "whats_in_box";
+  if(isSpecType && img && m.bullets && m.bullets.length >= 2){
+    const left = m.bullets.filter((_,i)=>i%2===0);
+    const right = m.bullets.filter((_,i)=>i%2===1);
+    const col = (items, side) => '<div class="leader-col '+side+'">'+items.map(b=>
+      '<div class="leader-label"><span class="leader-tick"></span><span>'+escapeHtml(b)+'</span></div>').join('')+'</div>';
+    const diagram = '<div class="leader-wrap">' + col(left,"left") + '<div class="leader-img"><img src="'+img+'"></div>' + col(right,"right") + '</div>' +
+      '<div class="leader-stack"><div class="leader-img" style="width:100%;margin-bottom:14px;"><img src="'+img+'"></div>' +
+      '<ol class="callout-list">'+m.bullets.map((b,bi)=>'<li><span class="callout-num">'+(bi+1)+'</span>'+escapeHtml(b)+'</li>').join('')+'</ol></div>';
+    return eyebrowHtml(m) + '<h3>'+escapeHtml(m.headline||"")+'</h3>' +
+      (m.subheadline ? '<div class="sub">'+escapeHtml(m.subheadline)+'</div>' : '') +
+      (m.body ? '<div class="body-txt">'+escapeHtml(m.body)+'</div>' : '') +
+      diagram + mobileNoteHtml(m, device);
+  }
+
+  // Feature/spec/use-case modules WITHOUT a photo: icon-badge row.
+  if(isSpecType && m.bullets && m.bullets.length){
+    const badges = '<div class="badge-row">'+m.bullets.map((b,bi)=>
+      '<div class="badge-item"><div class="badge-circle">'+(bi+1)+'</div><div class="lbl">'+escapeHtml(b)+'</div></div>').join('')+'</div>';
+    return eyebrowHtml(m) + '<h3>'+escapeHtml(m.headline||"")+'</h3>' +
+      (m.subheadline ? '<div class="sub">'+escapeHtml(m.subheadline)+'</div>' : '') +
+      (m.body ? '<div class="body-txt">'+escapeHtml(m.body)+'</div>' : '') +
+      badges + mobileNoteHtml(m, device);
+  }
+
+  // Everything else (brand_story, problem_solution, or any fallback): a statement layout — big photo, bold pull-line, bullets below.
+  const media = img ? '<div class="statement-media"><img src="'+img+'"></div>' : "";
+  const bullets = (m.bullets && m.bullets.length) ? '<ul class="bullets">'+m.bullets.map(b=>'<li>'+escapeHtml(b)+'</li>').join('')+'</ul>' : "";
+  return eyebrowHtml(m) + '<h3 class="statement-h">'+escapeHtml(m.headline||"")+'</h3>' +
     (m.subheadline ? '<div class="sub">'+escapeHtml(m.subheadline)+'</div>' : '') +
-    content +
-    (device==="mobile" && m.mobileNote ? '<div class="mobile-note">📱 '+escapeHtml(m.mobileNote)+'</div>' : '');
+    media +
+    (m.body ? '<div class="body-txt">'+escapeHtml(m.body)+'</div>' : '') +
+    bullets + mobileNoteHtml(m, device);
 }
 
 const WAVE_SVG = '<div class="wave-divider"><svg viewBox="0 0 400 26" preserveAspectRatio="none"><path d="M0,13 Q50,26 100,13 T200,13 T300,13 T400,13 V26 H0 Z" fill="#EEF0EA"></path></svg></div>';
@@ -1082,7 +1174,7 @@ function renderModulesForStyle(modules, device, style){
       return '<div class="mod-card tint-'+(i%5)+' '+span+' capture-item" data-idx="'+i+'"><span class="tagno">'+(i+1)+'/'+n+'</span><div class="mod">'+moduleInner(m,device,style)+'</div></div>';
     }).join('') + '</div>';
   }
-  if(style === "cards" || style === "callouts"){
+  if(style === "cards"){
     return '<div class="mod-card-wrap">' + modules.map((m,i)=>
       '<div class="mod-card tint-'+(i%5)+' capture-item" data-idx="'+i+'"><span class="tagno">'+(i+1)+'/'+n+'</span><div class="mod">'+moduleInner(m,device,style)+'</div></div>'
     ).join('') + '</div>';
